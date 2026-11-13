@@ -10,7 +10,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "tsc --noEmit",
-    "seo-check": "node scripts/check-seo-limits.mjs"
+    "seo-check": "node scripts/check-seo-limits.mjs",
+    "test": "node scripts/check-seo-limits.mjs && node scripts/verify-schemas.mjs && node scripts/verify-headers.mjs"
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
