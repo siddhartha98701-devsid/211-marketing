@@ -1,0 +1,51 @@
+---
+import { getActiveFaqs } from "../config/faq";
+import { SITE_CONFIG } from "../config/site";
+
+export interface Props {
+  heading?: string;
+  lead?: string;
+}
+
+const {
+  heading = "Frequently asked questions",
+  lead = "Short, direct answers in the format AI assistants quote."
+} = Astro.props;
+
+const faqs = getActiveFaqs(SITE_CONFIG.flags.showPricingFaq);
+---
+
+<section class="py-16 sm:py-24 border-t border-stone-soft" aria-labelledby="faq-section-heading">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center mb-12">
+      <h2 id="faq-section-heading" class="text-3xl sm:text-4xl font-serif font-semibold text-navy">
+        {heading}
+      </h2>
+      {lead && (
+        <p class="mt-3 text-base text-navy/70 max-w-2xl mx-auto">
+          {lead}
+        </p>
+      )}
+    </div>
+
+    <div class="divide-y divide-stone-soft border-y border-stone-soft">
+      {faqs.map((faq, index) => (
+        <details class="group py-6 transition-colors" id={`faq-${index + 1}`}>
+          <summary class="flex justify-between items-center cursor-pointer list-none text-left font-serif text-xl sm:text-2xl font-medium text-navy group-hover:text-navy-light focus:outline-none focus-visible:ring-2 focus-visible:ring-navy rounded">
+            <span class="pr-6">{faq.question}</span>
+            <span class="ml-4 flex-shrink-0 text-taupe-quiet group-open:rotate-180 transition-transform duration-200">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-4 pt-2 pr-6 text-navy/85 leading-relaxed text-base sm:text-lg font-sans">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</section>

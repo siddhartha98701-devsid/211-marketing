@@ -1,0 +1,135 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FreeCheckBand from "../components/FreeCheckBand.astro";
+import { SITE_CONFIG } from "../config/site";
+import { getBreadcrumbSchema } from "../schemas/jsonld";
+
+const title = "About 211 Marketing | Doctor-Founded Healthcare Marketing";
+const description = "211 Marketing is a doctor-founded healthcare communication firm in Ahmedabad, led by Dr Mrugesh, MD Anaesthesiology, FPCI.";
+
+const breadcrumbSchema = getBreadcrumbSchema(SITE_CONFIG.placeholders.siteUrl, [
+  { name: "About", path: "/about/" }
+]);
+
+const whatWeWontDoItems = [
+  "guarantee patients",
+  "post testimonials or before/afters",
+  "buy reviews",
+  "tie our fees to patient referrals"
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/about/"
+  schemas={[breadcrumbSchema]}
+>
+  <!-- Hero Section -->
+  <section class="bg-navy text-canvas-warm pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-navy-light" aria-labelledby="about-h1">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      
+      <div class="inline-flex items-center space-x-2 bg-navy-light/60 border border-stone-soft/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest text-taupe-light uppercase">
+        <span>ORIGIN &amp; PHILOSOPHY</span>
+      </div>
+
+      <h1 id="about-h1" class="text-4xl sm:text-5xl lg:text-6xl font-serif font-semibold tracking-tight text-canvas-warm leading-[1.15] max-w-3xl mx-auto">
+        A marketing firm with a doctor's eye.
+      </h1>
+
+      <p class="text-lg sm:text-xl text-canvas-warm/85 font-sans max-w-2xl mx-auto leading-relaxed">
+        Led by Dr Mrugesh, MD Anaesthesiology, FPCI — practicing healthcare with clinical standards.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Narrative & Sections -->
+  <section class="py-16 sm:py-24 bg-canvas">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      
+      <!-- Body Section (Verbatim from brief) -->
+      <article class="bg-white p-8 sm:p-12 rounded-xl border border-stone-soft shadow-sm space-y-6">
+        <span class="text-xs font-semibold tracking-wider text-taupe-quiet uppercase block">The Background</span>
+        <p class="text-xl sm:text-2xl font-serif text-navy leading-relaxed">
+          211 Marketing was founded by Dr Mrugesh, MD Anaesthesiology, FPCI, who has been active professionally in Ahmedabad for nine years. Having worked inside healthcare, he saw the same problem again and again: good clinics marketed like shops, or not at all. 211 exists to fix that, with communication that is accurate, useful and quietly premium.
+        </p>
+      </article>
+
+      <!-- The Name Section (Verbatim from brief) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        
+        <div class="bg-canvas-muted p-8 rounded-xl border border-stone-soft space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-xs font-semibold tracking-wider text-taupe-quiet uppercase block">Nomenclature</span>
+            <h2 class="text-2xl sm:text-3xl font-serif font-semibold text-navy">
+              The name
+            </h2>
+            <p class="text-base sm:text-lg text-navy/85 font-sans leading-relaxed">
+              2 is the sweep of creative thinking; 11 is the structure of disciplined execution. Together: Creativity + Structure = Growth.
+            </p>
+          </div>
+          
+          <div class="pt-4 flex items-center space-x-3 text-navy font-serif text-3xl font-semibold">
+            <span>2</span>
+            <span class="text-taupe-quiet text-xl font-sans">+</span>
+            <span>11</span>
+            <span class="text-taupe-quiet text-xl font-sans">=</span>
+            <span class="text-taupe-dark">Growth</span>
+          </div>
+        </div>
+
+        <!-- What We Believe (Verbatim from brief) -->
+        <div class="bg-white p-8 rounded-xl border border-stone-soft space-y-4 flex flex-col justify-between">
+          <div class="space-y-3">
+            <span class="text-xs font-semibold tracking-wider text-taupe-quiet uppercase block">Core Ethos</span>
+            <h2 class="text-2xl sm:text-3xl font-serif font-semibold text-navy">
+              What we believe
+            </h2>
+            <p class="text-base sm:text-lg text-navy/85 font-sans leading-relaxed">
+              Healthcare is not ordinary advertising. Visibility should never cost credibility. Less noise, more intent.
+            </p>
+          </div>
+
+          <div class="pt-4 border-t border-stone-soft">
+            <p class="text-xs text-taupe-quiet font-mono uppercase tracking-widest">
+              Dignity · Verifiability · Patient Trust
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- What We Won't Do (Verbatim from brief) -->
+      <div class="bg-white border-2 border-stone-soft rounded-xl p-8 sm:p-10 space-y-6">
+        <div>
+          <span class="text-xs font-semibold tracking-wider text-red-800 uppercase block mb-1">Ethical Boundary</span>
+          <h2 class="text-2xl sm:text-3xl font-serif font-semibold text-navy">
+            What we won't do
+          </h2>
+        </div>
+
+        <ul class="space-y-4 pt-2">
+          {whatWeWontDoItems.map((item) => (
+            <li class="flex items-start space-x-3">
+              <span class="w-6 h-6 rounded-full bg-red-100 text-red-800 flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold" aria-hidden="true">
+                ✕
+              </span>
+              <span class="text-lg sm:text-xl font-serif text-navy capitalize">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <p class="text-xs text-taupe-quiet pt-4 border-t border-stone-soft">
+          Strictly compliant with National Medical Commission (NMC) professional conduct codes.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Free Check Band -->
+  <FreeCheckBand />
+</Layout>

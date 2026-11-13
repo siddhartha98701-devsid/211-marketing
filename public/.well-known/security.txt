@@ -1,0 +1,6 @@
+Contact: mailto:contact@211marketing.in
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en, gu, hi
+Canonical: https://211marketing.in/.well-known/security.txt
+Policy: https://211marketing.in/privacy/
+Acknowledgments: https://211marketing.in/

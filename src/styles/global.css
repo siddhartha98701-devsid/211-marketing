@@ -1,0 +1,78 @@
+@import "@fontsource/eb-garamond/400.css";
+@import "@fontsource/eb-garamond/500.css";
+@import "@fontsource/eb-garamond/600.css";
+@import "@fontsource/eb-garamond/700.css";
+@import "@fontsource/lato/300.css";
+@import "@fontsource/lato/400.css";
+@import "@fontsource/lato/700.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-canvas: #F6F2EA;
+  --color-navy: #263947;
+  --color-stone: #D8D1C6;
+  --color-taupe: #9A8A72;
+}
+
+/* Base resets & typography */
+html {
+  background-color: var(--color-canvas);
+  color: var(--color-navy);
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 3px;
+}
+
+/* Skip to main content link for keyboard accessibility */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: 1rem;
+  background: var(--color-navy);
+  color: var(--color-canvas);
+  padding: 0.75rem 1.25rem;
+  z-index: 100;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s ease-in-out;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Subtle styling helpers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'EB Garamond', Garamond, Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--color-navy);
+}
+
+::selection {
+  background-color: #263947;
+  color: #F6F2EA;
+}

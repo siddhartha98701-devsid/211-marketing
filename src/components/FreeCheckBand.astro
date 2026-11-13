@@ -1,0 +1,32 @@
+---
+export interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<section class={`bg-navy text-canvas-warm py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-y border-navy-light ${className}`} aria-labelledby="free-check-band-heading">
+  <div class="max-w-4xl mx-auto text-center space-y-6">
+    <span class="inline-block text-xs font-semibold tracking-widest text-taupe-light uppercase">
+      Complimentary Diagnostic Review
+    </span>
+    
+    <h2 id="free-check-band-heading" class="text-3xl sm:text-4xl lg:text-5xl font-serif font-semibold text-canvas-warm tracking-tight leading-tight">
+      Is your clinic's Instagram ready for the new NMC rules?
+    </h2>
+    
+    <p class="text-lg sm:text-xl text-canvas-warm/85 font-sans max-w-2xl mx-auto leading-relaxed">
+      A free 15-point check of your Instagram, Google profile and website. One page, within 48 hours. No sales pressure.
+    </p>
+
+    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href="/free-nmc-check/"
+        class="w-full sm:w-auto inline-flex items-center justify-center bg-canvas-warm text-navy font-semibold px-8 py-4 text-base rounded shadow-md hover:bg-white hover:scale-[1.01] transition-all focus:ring-2 focus:ring-offset-2 focus:ring-canvas-warm"
+      >
+        Get my free check
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,41 @@
+name: CI & Technical SEO Verification
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+# Least-privilege workflow permissions
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Lint, SEO Bound Checks, and Static Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.2
+
+      - name: Setup Node.js runtime
+        uses: actions/setup-node@v4.2.0
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install pinned dependencies
+        run: npm ci
+
+      - name: Technical SEO Character Bounds Check (≤60 Title, ≤145 Meta)
+        run: npm run seo-check
+
+      - name: Astro Type & Schema Check
+        run: npm run check
+
+      - name: Production Static Build
+        run: npx astro build
+        env:
+          SITE_URL: "https://211marketing.in"
+          BUSINESS_EMAIL: "contact@211marketing.in"

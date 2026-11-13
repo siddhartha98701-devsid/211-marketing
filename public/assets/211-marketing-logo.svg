@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80" width="360" height="80">
+  <defs>
+    <style>
+      .num2 { font-family: 'EB Garamond', Georgia, serif; font-size: 52px; font-weight: 600; fill: #263947; }
+      .num11 { font-family: 'EB Garamond', Georgia, serif; font-size: 52px; font-weight: 500; fill: #9A8A72; letter-spacing: -1px; }
+      .brand-title { font-family: 'Lato', -apple-system, sans-serif; font-size: 19px; font-weight: 700; fill: #263947; letter-spacing: 3px; }
+      .brand-sub { font-family: 'Lato', -apple-system, sans-serif; font-size: 9.5px; font-weight: 600; fill: #9A8A72; letter-spacing: 2px; }
+      .pillar { fill: #9A8A72; }
+      .rule { stroke: #D8D1C6; stroke-width: 1; }
+    </style>
+  </defs>
+  <!-- Mark -->
+  <g transform="translate(10, 12)">
+    <text x="0" y="44" class="num2">2</text>
+    <rect x="29" y="8" width="5.5" height="40" rx="1.5" class="pillar" />
+    <rect x="40" y="8" width="5.5" height="40" rx="1.5" class="pillar" />
+  </g>
+  <!-- Divider -->
+  <line x1="72" y1="18" x2="72" y2="58" class="rule" />
+  <!-- Typography -->
+  <g transform="translate(86, 12)">
+    <text x="0" y="27" class="brand-title">MARKETING</text>
+    <text x="1" y="45" class="brand-sub">HEALTHCARE · AHMEDABAD</text>
+  </g>
+</svg>

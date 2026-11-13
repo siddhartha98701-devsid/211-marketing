@@ -1,0 +1,415 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { SITE_CONFIG } from "../config/site";
+import { getBreadcrumbSchema } from "../schemas/jsonld";
+
+const title = "Free NMC-Aware Check for Clinics & Hospitals | 211 Marketing";
+const description = "A free 15-point review of your clinic's Instagram, Google profile and website against the new NMC rules. One page, within 48 hours.";
+
+const breadcrumbSchema = getBreadcrumbSchema(SITE_CONFIG.placeholders.siteUrl, [
+  { name: "Free NMC Check", path: "/free-nmc-check/" }
+]);
+
+const turnstileSiteKey = process.env.PUBLIC_TURNSTILE_SITE_KEY || "";
+
+const whatWeCheckItems = [
+  "credentials and registration details",
+  "claims and superlatives",
+  "testimonials and patient images",
+  "offers and urgency",
+  "AI-made content",
+  "Google profile accuracy",
+  "website basics"
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/free-nmc-check/"
+  schemas={[breadcrumbSchema]}
+>
+  <!-- Hero Section -->
+  <section class="bg-navy text-canvas-warm pt-14 pb-16 sm:pt-20 sm:pb-24 border-b border-navy-light" aria-labelledby="free-check-h1">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
+      
+      <div class="inline-flex items-center space-x-2 bg-navy-light/60 border border-stone-soft/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest text-taupe-light uppercase">
+        <span>NO COST · 48-HOUR TURNAROUND · NO SALES PRESSURE</span>
+      </div>
+
+      <h1 id="free-check-h1" class="text-4xl sm:text-5xl lg:text-6xl font-serif font-semibold tracking-tight text-canvas-warm leading-tight max-w-3xl mx-auto">
+        Your free NMC-aware check.
+      </h1>
+
+      <p class="text-lg sm:text-xl text-canvas-warm/85 font-sans max-w-2xl mx-auto leading-relaxed">
+        Send us your Instagram, Google profile and website. Within 48 hours you'll get a one-page review: what's clear, what to review and what to fix.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Main Container: What We Check + Form -->
+  <section class="py-14 sm:py-20 bg-canvas">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Left: What We Check (Brief page 5) -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="bg-canvas-muted p-6 sm:p-8 rounded-xl border border-stone-soft space-y-5">
+            <span class="text-xs font-semibold tracking-wider text-taupe-quiet uppercase block">Diagnostic Scope</span>
+            <h2 class="text-2xl font-serif font-semibold text-navy">
+              What we check
+            </h2>
+            
+            <p class="text-sm text-navy/80 leading-relaxed font-sans">
+              Our 15-point review examines public profiles across the essential NMC advertising compliance touchpoints:
+            </p>
+
+            <ul class="space-y-3 pt-2">
+              {whatWeCheckItems.map((item) => (
+                <li class="flex items-center space-x-3 text-sm sm:text-base text-navy font-sans">
+                  <span class="w-1.5 h-1.5 rounded-full bg-taupe-quiet flex-shrink-0"></span>
+                  <span class="capitalize">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="pt-4 border-t border-stone-soft/70">
+              <p class="text-xs text-navy/70 italic">
+                Delivered as a single, actionable PDF page with clear priorities: clear, review, fix.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: The Form Card -->
+        <div class="lg:col-span-7">
+          <div class="bg-white p-8 sm:p-10 rounded-xl border border-stone-soft shadow-sm">
+            
+            <!-- Thank You Alert (Shown after successful submission) -->
+            <div id="form-success-box" class="hidden mb-8 p-6 bg-[#EAF5EC] border border-[#A7D7AF] rounded-lg text-navy space-y-2">
+              <div class="flex items-center space-x-2 text-[#1C6B2D] font-semibold text-lg font-serif">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                <span>Submission Received</span>
+              </div>
+              <p class="text-sm font-sans leading-relaxed">
+                Thank you. We'll send your one-page check on WhatsApp or email within 48 hours.
+              </p>
+            </div>
+
+            <!-- Error Alert -->
+            <div id="form-error-box" class="hidden mb-6 p-4 bg-[#FBEBEB] border border-[#E8AAAA] rounded-md text-navy text-sm font-sans">
+              <p id="form-error-msg">Please review the highlighted fields below.</p>
+            </div>
+
+            <form
+              id="free-check-form"
+              action="/api/free-nmc-check"
+              method="POST"
+              class="space-y-5"
+              novalidate
+            >
+              <!-- Security Honeypot (must be left empty by humans) -->
+              <div class="opacity-0 absolute -z-50 select-none pointer-events-none w-0 h-0 overflow-hidden" aria-hidden="true">
+                <label for="website_url_hp">Leave this empty</label>
+                <input type="text" id="website_url_hp" name="website_url_hp" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <!-- Security Timestamp -->
+              <input type="hidden" id="form_rendered_at" name="form_rendered_at" value="" />
+
+              <!-- Field 1: Name -->
+              <div>
+                <label for="name" class="block text-sm font-medium text-navy mb-1">
+                  Name <span class="text-red-700" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  maxlength="100"
+                  class="w-full px-4 py-2.5 bg-canvas border border-stone-soft rounded focus:ring-2 focus:ring-navy focus:border-navy text-navy text-base"
+                  placeholder="Dr. Full Name"
+                />
+                <p id="error-name" class="hidden text-xs text-red-700 mt-1"></p>
+              </div>
+
+              <!-- Field 2: Organisation -->
+              <div>
+                <label for="organisation" class="block text-sm font-medium text-navy mb-1">
+                  Organisation <span class="text-red-700" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="organisation"
+                  name="organisation"
+                  required
+                  maxlength="120"
+                  class="w-full px-4 py-2.5 bg-canvas border border-stone-soft rounded focus:ring-2 focus:ring-navy focus:border-navy text-navy text-base"
+                  placeholder="Clinic, Hospital, or Practice Name"
+                />
+                <p id="error-organisation" class="hidden text-xs text-red-700 mt-1"></p>
+              </div>
+
+              <!-- Field 3: I am a (Select) -->
+              <div>
+                <label for="entityType" class="block text-sm font-medium text-navy mb-1">
+                  I am a <span class="text-red-700" aria-hidden="true">*</span>
+                </label>
+                <select
+                  id="entityType"
+                  name="entityType"
+                  required
+                  class="w-full px-4 py-2.5 bg-canvas border border-stone-soft rounded focus:ring-2 focus:ring-navy focus:border-navy text-navy text-base"
+                >
+                  <option value="" disabled selected>Select practice type...</option>
+                  <option value="Doctor">Doctor</option>
+                  <option value="Clinic">Clinic</option>
+                  <option value="Hospital">Hospital</option>
+                  <option value="Diagnostics">Diagnostics</option>
+                  <option value="Other">Other</option>
+                </select>
+                <p id="error-entityType" class="hidden text-xs text-red-700 mt-1"></p>
+              </div>
+
+              <!-- Field 4: City -->
+              <div>
+                <label for="city" class="block text-sm font-medium text-navy mb-1">
+                  City <span class="text-red-700" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  required
+                  maxlength="80"
+                  class="w-full px-4 py-2.5 bg-canvas border border-stone-soft rounded focus:ring-2 focus:ring-navy focus:border-navy text-navy text-base"
+                  placeholder="e.g. Ahmedabad"
+                />
+                <p id="error-city" class="hidden text-xs text-red-700 mt-1"></p>
+              </div>
+
+              <!-- Field 5: Instagram handle -->
+              <div>
+                <label for="instagram" class="block text-sm font-medium text-navy mb-1">
+                  Instagram handle <span class="text-red-700" aria-hidden="true">*</span>
+                </label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-taupe-quiet font-sans">@</span>
+                  <input
+                    type="text"
+                    id="instagram"
+                    name="instagram"
+                    required
+                    maxlength="35"
+                    class="w-full pl-8 pr-4 py-2.5 bg-canvas border border-stone-soft rounded focus:ring-2 focus:ring-navy focus:border-navy text-navy text-base"
+                    placeholder="clinic_handle"
+                  />
+                </div>
+                <p id="error-instagram" class="hidden text-xs text-red-700 mt-1"></p>
+              </div>
+
+              <!-- Field 6: Website -->
+              <div>
+                <label for="website" class="block text-sm font-medium text-navy mb-1">
+                  Website <span class="text-taupe-quiet text-xs font-normal">(Optional)</span>
+                </label>
+                <input
+                  type="url"
+                  id="website"
+                  name="website"
+                  maxlength="200"
+                  class="w-full px-4 py-2.5 bg-canvas border border-stone-soft rounded focus:ring-2 focus:ring-navy focus:border-navy text-navy text-base"
+                  placeholder="https://example.com"
+                />
+                <p id="error-website" class="hidden text-xs text-red-700 mt-1"></p>
+              </div>
+
+              <!-- Field 7: WhatsApp number -->
+              <div>
+                <label for="whatsapp" class="block text-sm font-medium text-navy mb-1">
+                  WhatsApp number <span class="text-red-700" aria-hidden="true">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="whatsapp"
+                  name="whatsapp"
+                  required
+                  maxlength="16"
+                  class="w-full px-4 py-2.5 bg-canvas border border-stone-soft rounded focus:ring-2 focus:ring-navy focus:border-navy text-navy text-base"
+                  placeholder="10-digit mobile (e.g. 90990 97585)"
+                />
+                <p id="error-whatsapp" class="hidden text-xs text-red-700 mt-1"></p>
+              </div>
+
+              <!-- Field 8: Consent Checkbox -->
+              <div class="pt-2">
+                <div class="flex items-start space-x-3">
+                  <input
+                    type="checkbox"
+                    id="consent"
+                    name="consent"
+                    required
+                    class="h-4 w-4 mt-1 text-navy border-stone-soft rounded focus:ring-navy"
+                  />
+                  <label for="consent" class="text-sm text-navy leading-normal">
+                    I agree to be contacted about my check.{" "}
+                    <a href="/privacy/" class="text-taupe-quiet hover:text-navy underline text-xs">
+                      (Privacy Notice)
+                    </a>
+                  </label>
+                </div>
+                <p id="error-consent" class="hidden text-xs text-red-700 mt-1"></p>
+              </div>
+
+              <!-- Cloudflare Turnstile Widget (If configured) -->
+              {turnstileSiteKey && (
+                <div class="pt-2">
+                  <div
+                    class="cf-turnstile"
+                    data-sitekey={turnstileSiteKey}
+                    data-theme="light"
+                  ></div>
+                </div>
+              )}
+
+              <!-- Submit Button -->
+              <div class="pt-4">
+                <button
+                  type="submit"
+                  id="submit-btn"
+                  class="w-full bg-navy text-canvas-warm font-semibold py-3.5 px-6 rounded text-base hover:bg-navy-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-navy transition-all shadow-sm flex items-center justify-center space-x-2"
+                >
+                  <span id="btn-text">Send for my free check</span>
+                  <span id="btn-spinner" class="hidden animate-spin h-4 w-4 border-2 border-canvas-warm border-t-transparent rounded-full"></span>
+                </button>
+              </div>
+
+              <!-- Small print -->
+              <p class="text-xs text-center text-taupe-quiet pt-2">
+                A marketing review, not legal advice.
+              </p>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</Layout>
+
+{turnstileSiteKey && (
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+)}
+
+<script>
+  // Progressive enhancement & client validation
+  const form = document.getElementById("free-check-form") as HTMLFormElement | null;
+  const timeField = document.getElementById("form_rendered_at") as HTMLInputElement | null;
+  const successBox = document.getElementById("form-success-box");
+  const errorBox = document.getElementById("form-error-box");
+  const errorMsg = document.getElementById("form-error-msg");
+  const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement | null;
+  const btnText = document.getElementById("btn-text");
+  const btnSpinner = document.getElementById("btn-spinner");
+
+  // Record time when form was loaded in user browser
+  if (timeField) {
+    timeField.value = Date.now().toString();
+  }
+
+  // Check URL query parameters for fallback redirect state
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("submitted") === "1" && successBox && form) {
+    form.classList.add("hidden");
+    successBox.classList.remove("hidden");
+  }
+
+  if (form && submitBtn && btnText && btnSpinner) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // Reset error messages
+      document.querySelectorAll("[id^='error-']").forEach((el) => {
+        el.classList.add("hidden");
+        el.textContent = "";
+      });
+      if (errorBox) errorBox.classList.add("hidden");
+
+      // Check consent
+      const consentBox = form.elements.namedItem("consent") as HTMLInputElement;
+      if (!consentBox.checked) {
+        const cErr = document.getElementById("error-consent");
+        if (cErr) {
+          cErr.textContent = "Please agree to be contacted to receive your check.";
+          cErr.classList.remove("hidden");
+        }
+        return;
+      }
+
+      // Enter loading state
+      submitBtn.disabled = true;
+      btnText.textContent = "Sending...";
+      btnSpinner.classList.remove("hidden");
+
+      const formData = new FormData(form);
+      const payload: Record<string, any> = {};
+      formData.forEach((val, key) => {
+        payload[key] = val;
+      });
+
+      try {
+        const res = await fetch("/api/free-nmc-check", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          form.reset();
+          form.classList.add("hidden");
+          if (successBox) {
+            successBox.classList.remove("hidden");
+            successBox.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        } else {
+          // Show error
+          if (errorBox && errorMsg) {
+            errorMsg.textContent = data.error || "Unable to send your request. Please try again.";
+            errorBox.classList.remove("hidden");
+          }
+
+          if (data.fields) {
+            Object.entries(data.fields).forEach(([field, messages]) => {
+              const el = document.getElementById(`error-${field}`);
+              if (el && Array.isArray(messages) && messages[0]) {
+                el.textContent = messages[0];
+                el.classList.remove("hidden");
+              }
+            });
+          }
+        }
+      } catch (networkErr) {
+        if (errorBox && errorMsg) {
+          errorMsg.textContent = "Network error. Please try again or message us on WhatsApp.";
+          errorBox.classList.remove("hidden");
+        }
+      } finally {
+        submitBtn.disabled = false;
+        btnText.textContent = "Send for my free check";
+        btnSpinner.classList.add("hidden");
+      }
+    });
+  }
+</script>

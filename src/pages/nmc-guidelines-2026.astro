@@ -1,0 +1,100 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FreeCheckBand from "../components/FreeCheckBand.astro";
+import { SITE_CONFIG } from "../config/site";
+import { NMC_GUIDE_DATA } from "../config/nmc-guide";
+import { getNMCArticleSchema, getBreadcrumbSchema } from "../schemas/jsonld";
+
+const title = "NMC Advertising Guidelines 2026, Explained | 211 Marketing";
+const description = "What doctors and hospitals can and can't post under the NMC guidelines dated 6 October 2026, in plain English. Updated by 211 Marketing.";
+
+const articleSchema = getNMCArticleSchema(SITE_CONFIG.placeholders.siteUrl);
+const breadcrumbSchema = getBreadcrumbSchema(SITE_CONFIG.placeholders.siteUrl, [
+  { name: "NMC Guidelines 2026", path: "/nmc-guidelines-2026/" }
+]);
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/nmc-guidelines-2026/"
+  schemas={[articleSchema, breadcrumbSchema]}
+>
+  <!-- Hero / Header Section -->
+  <article class="bg-canvas" aria-labelledby="nmc-h1">
+    
+    <header class="bg-navy text-canvas-warm pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-navy-light">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center">
+        
+        <div class="inline-flex items-center space-x-2 bg-navy-light/60 border border-stone-soft/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest text-taupe-light uppercase">
+          <span>REGULATORY REFERENCE &amp; COMPLIANCE</span>
+        </div>
+
+        <h1 id="nmc-h1" class="text-3xl sm:text-5xl lg:text-6xl font-serif font-semibold tracking-tight text-canvas-warm leading-[1.15] max-w-3xl mx-auto">
+          {NMC_GUIDE_DATA.h1}
+        </h1>
+
+        <!-- Byline Line -->
+        <p class="text-sm sm:text-base text-taupe-light font-sans">
+          By {SITE_CONFIG.name} · Last reviewed: {SITE_CONFIG.placeholders.nmcLastReviewedDate} · {NMC_GUIDE_DATA.disclaimer}
+        </p>
+
+      </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      
+      <!-- Answer Box (First Paragraph) -->
+      <div class="bg-white border-l-4 border-navy p-8 sm:p-10 rounded-r-lg shadow-sm border border-stone-soft/70 mb-16">
+        <span class="text-xs font-semibold tracking-wider text-taupe-quiet uppercase block mb-2">Executive Summary</span>
+        <p class="text-xl sm:text-2xl font-serif text-navy leading-relaxed font-normal">
+          {NMC_GUIDE_DATA.answerBox}
+        </p>
+      </div>
+
+      <!-- Question & Answer-First Sections -->
+      <div class="divide-y divide-stone-soft">
+        {NMC_GUIDE_DATA.questions.map((item, idx) => (
+          <section class="py-10 sm:py-12 first:pt-0 space-y-3" aria-labelledby={`q-${idx + 1}`}>
+            <span class="text-xs font-mono text-taupe-quiet block">Question 0{idx + 1}</span>
+            <h2 id={`q-${idx + 1}`} class="text-2xl sm:text-3xl font-serif font-semibold text-navy">
+              {item.question}
+            </h2>
+            <div class="mt-2 text-lg sm:text-xl font-sans text-navy/90 leading-relaxed bg-canvas-muted/60 p-5 rounded-md border border-stone-soft/50">
+              <p>{item.answer}</p>
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <!-- Official Notice Link & Closing Call -->
+      <div class="mt-16 pt-12 border-t-2 border-stone-soft flex flex-col sm:flex-row items-center justify-between gap-6 bg-white p-8 rounded-xl border border-stone-soft shadow-2xs">
+        <div>
+          <h3 class="font-serif text-xl sm:text-2xl font-semibold text-navy">
+            Official Regulatory Circular
+          </h3>
+          <p class="text-sm text-navy/70 mt-1">
+            Review the complete statutory gazette notification directly on the NMC portal.
+          </p>
+        </div>
+
+        <a
+          href={NMC_GUIDE_DATA.officialNoticeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center space-x-2 bg-navy text-canvas-warm px-6 py-3 rounded text-sm font-semibold hover:bg-navy-light transition-colors flex-shrink-0"
+        >
+          <span>{NMC_GUIDE_DATA.officialNoticeLabel}</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- Free Check Band -->
+  <FreeCheckBand />
+</Layout>

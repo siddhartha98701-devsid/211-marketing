@@ -1,0 +1,149 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FAQAccordion from "../components/FAQAccordion.astro";
+import FreeCheckBand from "../components/FreeCheckBand.astro";
+import { SITE_CONFIG } from "../config/site";
+import { getActiveFaqs } from "../config/faq";
+import { getFAQPageSchema, getBreadcrumbSchema } from "../schemas/jsonld";
+
+const title = "Hospital & Clinic Marketing in Ahmedabad | 211 Marketing";
+const description = "Ethical, premium marketing for hospitals, clinics, diagnostics and specialists, built around the NMC guidelines of 6 October 2026.";
+
+const activeFaqs = getActiveFaqs(SITE_CONFIG.flags.showPricingFaq);
+const faqSchema = getFAQPageSchema(activeFaqs);
+const breadcrumbSchema = getBreadcrumbSchema(SITE_CONFIG.placeholders.siteUrl, [
+  { name: "Healthcare Marketing", path: "/healthcare-marketing/" }
+]);
+
+const whoWeWorkWith = [
+  {
+    title: "Hospitals and multi-speciality centres",
+    desc: "Institution-level communication covering departments, facilities, verified technology and emergency care."
+  },
+  {
+    title: "Clinics and day-care centres",
+    desc: "Clear, local visibility that explains treatments and clinical protocols without retail hype."
+  },
+  {
+    title: "Diagnostics and labs",
+    desc: "Factual information about test capabilities, accreditations, sample collection and reporting turnaround."
+  },
+  {
+    title: "Individual specialists",
+    desc: "Thoughtful practitioner positioning highlighting verified credentials, qualifications and medical education."
+  }
+];
+
+const whatChangesForYou = [
+  "a Google profile that answers patients' questions",
+  "a feed that looks like the quality of your care",
+  "no testimonials, before/afters or \"best doctor\" claims that put you at risk",
+  "one partner for strategy, content, search and web"
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/healthcare-marketing/"
+  schemas={[faqSchema, breadcrumbSchema]}
+>
+  <!-- Hero Section -->
+  <section class="bg-navy text-canvas-warm pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-navy-light" aria-labelledby="healthcare-h1">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      
+      <div class="inline-flex items-center space-x-2 bg-navy-light/60 border border-stone-soft/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest text-taupe-light uppercase">
+        <span>ETHICAL HEALTHCARE COMMUNICATION</span>
+      </div>
+
+      <h1 id="healthcare-h1" class="text-4xl sm:text-5xl lg:text-6xl font-serif font-semibold tracking-tight text-canvas-warm leading-[1.15] max-w-4xl mx-auto">
+        Hospital and clinic marketing in Ahmedabad, done properly.
+      </h1>
+
+      <p class="text-lg sm:text-xl text-canvas-warm/85 font-sans max-w-3xl mx-auto leading-relaxed">
+        Patients choose healthcare on trust. We build that trust with clear information, calm design and content that respects the NMC guidelines.
+      </p>
+
+      <div class="pt-6 flex justify-center">
+        <a
+          href="/free-nmc-check/"
+          class="bg-canvas-warm text-navy font-semibold px-8 py-4 text-base rounded shadow-md hover:bg-white transition-all focus:ring-2 focus:ring-canvas-warm"
+        >
+          Start with a free check
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Who We Work With (Four Tiles) -->
+  <section class="py-16 sm:py-24 bg-canvas border-b border-stone-soft" aria-labelledby="who-we-work-with-heading">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="text-xs font-semibold tracking-widest text-taupe-quiet uppercase block mb-2">Practice Focus</span>
+        <h2 id="who-we-work-with-heading" class="text-3xl sm:text-4xl font-serif font-semibold text-navy">
+          Who we work with
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {whoWeWorkWith.map((tile, i) => (
+          <div class="bg-white border border-stone-soft rounded-lg p-6 shadow-2xs hover:border-taupe-quiet transition-colors space-y-3">
+            <span class="text-xs font-mono text-taupe-quiet block">0{i + 1}</span>
+            <h3 class="text-xl font-serif font-semibold text-navy">
+              {tile.title}
+            </h3>
+            <p class="text-sm text-navy/80 font-sans leading-relaxed">
+              {tile.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What Changes For You -->
+  <section class="py-16 sm:py-24 bg-canvas-muted border-b border-stone-soft" aria-labelledby="what-changes-heading">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="text-xs font-semibold tracking-widest text-taupe-quiet uppercase block mb-2">The Outcome</span>
+        <h2 id="what-changes-heading" class="text-3xl sm:text-4xl font-serif font-semibold text-navy">
+          What changes for you
+        </h2>
+      </div>
+
+      <div class="bg-white border border-stone-soft rounded-xl p-8 sm:p-10 shadow-sm space-y-6">
+        <ul class="space-y-5">
+          {whatChangesForYou.map((item) => (
+            <li class="flex items-start space-x-4">
+              <span class="w-6 h-6 rounded-full bg-navy text-canvas-warm flex items-center justify-center flex-shrink-0 mt-0.5 text-xs">
+                ✓
+              </span>
+              <span class="text-lg sm:text-xl font-serif text-navy leading-snug">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="pt-6 border-t border-stone-soft text-center sm:text-left">
+          <a
+            href="/free-nmc-check/"
+            class="inline-flex items-center text-base font-semibold text-navy hover:text-navy-light underline underline-offset-4"
+          >
+            Start with a free check &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Free Check Band -->
+  <FreeCheckBand />
+
+  <!-- FAQ Section (Shared data, matching schema) -->
+  <FAQAccordion
+    heading="Frequently asked questions"
+    lead="Short, direct answers in the format AI assistants quote."
+  />
+</Layout>

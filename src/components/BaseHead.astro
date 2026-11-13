@@ -1,0 +1,72 @@
+---
+import { SITE_CONFIG } from "../config/site";
+import { getProfessionalServiceSchema } from "../schemas/jsonld";
+
+export interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  schemas?: Record<string, any>[];
+}
+
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  ogImage = "/assets/211-og-image.png",
+  schemas = []
+} = Astro.props;
+
+const baseUrl = SITE_CONFIG.placeholders.siteUrl.replace(/\/+$/, "");
+const canonicalUrl = new URL(canonicalPath, baseUrl).toString();
+const absoluteOgImage = new URL(ogImage, baseUrl).toString();
+
+// Base ProfessionalService schema for every page
+const professionalServiceSchema = getProfessionalServiceSchema(baseUrl);
+const allSchemas = [professionalServiceSchema, ...schemas];
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#263947" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="author" content={SITE_CONFIG.name} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={absoluteOgImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="211 Marketing — Healthcare marketing agency in Ahmedabad" />
+<meta property="og:site_name" content={SITE_CONFIG.name} />
+<meta property="og:locale" content="en_IN" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalUrl} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={absoluteOgImage} />
+
+<!-- Structured Data (JSON-LD) -->
+{allSchemas.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

@@ -1,0 +1,137 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GoogleMap from "../components/GoogleMap.astro";
+import { SITE_CONFIG } from "../config/site";
+import { getBreadcrumbSchema } from "../schemas/jsonld";
+
+const title = "Contact 211 Marketing | Science City Road, Sola, Ahmedabad";
+const description = "Visit or call 211 Marketing at B-1405, The Capital, Science City Road, Sola, Ahmedabad 380060. Call or WhatsApp +91 90990 97585.";
+
+const breadcrumbSchema = getBreadcrumbSchema(SITE_CONFIG.placeholders.siteUrl, [
+  { name: "Contact", path: "/contact/" }
+]);
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/contact/"
+  schemas={[breadcrumbSchema]}
+>
+  <!-- Hero Section -->
+  <section class="bg-navy text-canvas-warm pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-navy-light" aria-labelledby="contact-h1">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      
+      <div class="inline-flex items-center space-x-2 bg-navy-light/60 border border-stone-soft/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest text-taupe-light uppercase">
+        <span>AHMEDABAD OFFICE</span>
+      </div>
+
+      <h1 id="contact-h1" class="text-4xl sm:text-5xl lg:text-6xl font-serif font-semibold tracking-tight text-canvas-warm leading-[1.15] max-w-3xl mx-auto">
+        Let's talk healthcare.
+      </h1>
+
+      <p class="text-xl sm:text-2xl font-serif italic text-canvas-warm/90 max-w-2xl mx-auto">
+        Tea is on us. So is your first check.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Contact Details & Map Grid -->
+  <section class="py-16 sm:py-24 bg-canvas">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Left Column: Verified Directory Contact Info -->
+        <div class="lg:col-span-5 space-y-8">
+          <div class="bg-white p-8 rounded-xl border border-stone-soft shadow-sm space-y-6">
+            
+            <div class="space-y-2 border-b border-stone-soft pb-6">
+              <span class="text-xs font-semibold tracking-wider text-taupe-quiet uppercase block">Headquarters</span>
+              <h2 class="text-2xl font-serif font-semibold text-navy">
+                {SITE_CONFIG.name}
+              </h2>
+              <p class="text-base text-navy/90 font-sans leading-relaxed pt-1">
+                {SITE_CONFIG.address.streetAddress},<br />
+                {SITE_CONFIG.address.addressLocality}, {SITE_CONFIG.address.addressRegion} {SITE_CONFIG.address.postalCode}
+              </p>
+            </div>
+
+            <div class="space-y-4 text-base font-sans text-navy">
+              <div>
+                <span class="text-xs font-semibold text-taupe-quiet uppercase tracking-wider block mb-1">
+                  Call / WhatsApp
+                </span>
+                <a
+                  href={SITE_CONFIG.contact.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-lg font-medium text-navy hover:text-navy-light underline underline-offset-4 flex items-center space-x-2"
+                >
+                  <span>{SITE_CONFIG.contact.telephone}</span>
+                  <span class="text-xs bg-[#25D366]/20 text-[#128C7E] px-2 py-0.5 rounded font-sans font-normal">WhatsApp</span>
+                </a>
+              </div>
+
+              <div>
+                <span class="text-xs font-semibold text-taupe-quiet uppercase tracking-wider block mb-1">
+                  Instagram
+                </span>
+                <a
+                  href={SITE_CONFIG.contact.instagramHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-base font-medium text-navy hover:text-navy-light underline underline-offset-4"
+                >
+                  {SITE_CONFIG.contact.instagram}
+                </a>
+              </div>
+
+              <div>
+                <span class="text-xs font-semibold text-taupe-quiet uppercase tracking-wider block mb-1">
+                  Email
+                </span>
+                <a
+                  href={`mailto:${SITE_CONFIG.placeholders.businessEmail}`}
+                  class="text-base font-medium text-navy hover:text-navy-light underline underline-offset-4"
+                >
+                  {SITE_CONFIG.placeholders.businessEmail}
+                </a>
+              </div>
+
+              <div>
+                <span class="text-xs font-semibold text-taupe-quiet uppercase tracking-wider block mb-1">
+                  Hours
+                </span>
+                <p class="text-base text-navy/85">
+                  {SITE_CONFIG.placeholders.hours}
+                </p>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-stone-soft">
+              <a
+                href="/free-nmc-check/"
+                class="block w-full text-center bg-navy text-canvas-warm font-semibold py-3 px-4 rounded hover:bg-navy-light transition-colors text-sm"
+              >
+                Request Free NMC-Aware Check &rarr;
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Embedded Google Map -->
+        <div class="lg:col-span-7 space-y-4">
+          <GoogleMap />
+          <p class="text-xs text-taupe-quiet font-sans text-center sm:text-left">
+            Located at The Capital, Science City Road, Sola — accessible across Ahmedabad and Gandhinagar.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</Layout>

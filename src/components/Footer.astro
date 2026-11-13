@@ -1,0 +1,141 @@
+---
+import { SITE_CONFIG } from "../config/site";
+---
+
+<footer class="bg-navy text-canvas-warm border-t border-navy-light pt-16 pb-24 md:pb-16" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="sr-only">Footer</h2>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Top Row: Brand Statement & Closing Line -->
+    <div class="pb-12 border-b border-navy-light flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div class="space-y-3 max-w-xl">
+        <div class="flex items-center space-x-2">
+          <span class="font-serif text-3xl font-semibold tracking-tight text-canvas-warm">2</span>
+          <span class="inline-flex space-x-1">
+            <span class="w-1.5 h-5 bg-stone-soft rounded-sm inline-block"></span>
+            <span class="w-1.5 h-5 bg-stone-soft rounded-sm inline-block"></span>
+          </span>
+          <span class="font-sans text-sm font-bold tracking-widest text-canvas-warm ml-2">MARKETING</span>
+        </div>
+        <p class="text-taupe-light text-sm italic">
+          {SITE_CONFIG.slogan}
+        </p>
+        <p class="text-canvas-warm/75 text-sm leading-relaxed">
+          {SITE_CONFIG.description}
+        </p>
+      </div>
+
+      <div class="text-left md:text-right">
+        <p class="text-2xl sm:text-3xl font-serif text-canvas-warm italic tracking-wide">
+          Less noise. More trust.
+        </p>
+      </div>
+    </div>
+
+    <!-- Middle Row: 3 Columns (Address/Contact, Navigation, Legal/Regulatory) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 py-12 border-b border-navy-light text-sm">
+      
+      <!-- Col 1: Identity & Exact Verified Contact -->
+      <div class="space-y-4">
+        <h3 class="font-sans font-semibold tracking-wider text-xs text-taupe-light uppercase">
+          Location &amp; Contact
+        </h3>
+        <p class="text-canvas-warm/90 leading-relaxed">
+          <strong class="font-medium block text-canvas-warm">{SITE_CONFIG.name}</strong>
+          {SITE_CONFIG.address.streetAddress},<br />
+          {SITE_CONFIG.address.addressLocality}, {SITE_CONFIG.address.addressRegion} {SITE_CONFIG.address.postalCode}
+        </p>
+        <div class="space-y-1.5 pt-1 text-canvas-warm/85">
+          <p>
+            <span class="text-taupe-light">Phone:</span>{" "}
+            <a href={SITE_CONFIG.contact.phoneHref} class="hover:text-canvas-warm underline-offset-4 hover:underline">
+              {SITE_CONFIG.contact.telephone}
+            </a>
+          </p>
+          <p>
+            <span class="text-taupe-light">WhatsApp:</span>{" "}
+            <a href={SITE_CONFIG.contact.whatsappHref} target="_blank" rel="noopener noreferrer" class="hover:text-canvas-warm underline-offset-4 hover:underline">
+              {SITE_CONFIG.contact.whatsapp}
+            </a>
+          </p>
+          <p>
+            <span class="text-taupe-light">Instagram:</span>{" "}
+            <a href={SITE_CONFIG.contact.instagramHref} target="_blank" rel="noopener noreferrer" class="hover:text-canvas-warm underline-offset-4 hover:underline">
+              {SITE_CONFIG.contact.instagram}
+            </a>
+          </p>
+          <p>
+            <span class="text-taupe-light">Hours:</span> {SITE_CONFIG.placeholders.hours}
+          </p>
+        </div>
+      </div>
+
+      <!-- Col 2: Navigation Links -->
+      <div class="space-y-4">
+        <h3 class="font-sans font-semibold tracking-wider text-xs text-taupe-light uppercase">
+          Agency Navigation
+        </h3>
+        <ul class="space-y-2.5 text-canvas-warm/85">
+          <li>
+            <a href="/" class="hover:text-canvas-warm hover:underline underline-offset-4">Home</a>
+          </li>
+          <li>
+            <a href="/healthcare-marketing/" class="hover:text-canvas-warm hover:underline underline-offset-4">Healthcare Marketing</a>
+          </li>
+          <li>
+            <a href="/services/" class="hover:text-canvas-warm hover:underline underline-offset-4">Marketing Services</a>
+          </li>
+          <li>
+            <a href="/nmc-guidelines-2026/" class="hover:text-canvas-warm hover:underline underline-offset-4">NMC Guidelines 2026 Explained</a>
+          </li>
+          <li>
+            <a href="/free-nmc-check/" class="hover:text-canvas-warm hover:underline underline-offset-4">Free NMC-Aware Check</a>
+          </li>
+          <li>
+            <a href="/about/" class="hover:text-canvas-warm hover:underline underline-offset-4">About Dr Mrugesh &amp; 211</a>
+          </li>
+          <li>
+            <a href="/contact/" class="hover:text-canvas-warm hover:underline underline-offset-4">Contact Science City Office</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Regulatory & Privacy Notice -->
+      <div class="space-y-4">
+        <h3 class="font-sans font-semibold tracking-wider text-xs text-taupe-light uppercase">
+          Ethical Standard
+        </h3>
+        <p class="text-canvas-warm/75 text-xs leading-relaxed">
+          All client strategies, digital communication, and website architecture are developed to strictly respect the National Medical Commission (NMC) guidelines of 6 October 2026.
+        </p>
+        <p class="text-canvas-warm/75 text-xs leading-relaxed">
+          We strictly do not publish patient testimonials, clinical before/after photographs, superlatives, or promises of patient numbers.
+        </p>
+        <div class="pt-2">
+          <a
+            href="/privacy/"
+            class="text-xs text-taupe-light hover:text-canvas-warm underline underline-offset-4"
+          >
+            Privacy Policy &amp; Data Notice (DPDP Act 2023)
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Row: Attribution -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-taupe-light gap-4">
+      <p>
+        &copy; {new Date().getFullYear()} {SITE_CONFIG.legalName}. All rights reserved. Registered in Ahmedabad, Gujarat.
+      </p>
+      <div class="flex items-center space-x-4">
+        <a href="/privacy/" class="hover:text-canvas-warm">Privacy Policy</a>
+        <span>·</span>
+        <a href="/.well-known/security.txt" class="hover:text-canvas-warm">Security</a>
+        <span>·</span>
+        <a href="/sitemap-index.xml" class="hover:text-canvas-warm">Sitemap</a>
+      </div>
+    </div>
+
+  </div>
+</footer>

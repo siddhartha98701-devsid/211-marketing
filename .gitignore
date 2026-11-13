@@ -1,0 +1,29 @@
+# Build & runtime artifacts
+dist/
+.astro/
+node_modules/
+.wrangler/
+.vercel/
+
+# Environment files
+.env
+.env.production
+.env.staging
+.env.local
+.env.*.local
+!.env.example
+
+# Logs & temp
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Test reports
+lighthouse-*.json
+browser-verification-results.json

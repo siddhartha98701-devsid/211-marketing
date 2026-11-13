@@ -1,0 +1,217 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FreeCheckBand from "../components/FreeCheckBand.astro";
+import FAQAccordion from "../components/FAQAccordion.astro";
+import { SITE_CONFIG } from "../config/site";
+import { getActiveFaqs } from "../config/faq";
+import { getFAQPageSchema } from "../schemas/jsonld";
+
+const title = "Healthcare Marketing Agency in Ahmedabad | 211 Marketing";
+const description = "Doctor-founded, NMC-aware marketing for hospitals, clinics and diagnostic centres in Ahmedabad. Social media, Google, websites. Get a free check.";
+
+const activeFaqs = getActiveFaqs(SITE_CONFIG.flags.showPricingFaq);
+const faqSchema = getFAQPageSchema(activeFaqs);
+
+const threeCards = [
+  {
+    title: "We speak fluent medicine.",
+    line: "Our founder is a doctor, so we know the difference between a procedure and a promise."
+  },
+  {
+    title: "And fluent Instagram.",
+    line: "Reels, carousels and Google profiles that people actually stop for, and save."
+  },
+  {
+    title: "Rules first, reach second.",
+    line: "Every post is checked for credentials, claims, patient privacy and AI use before it goes live."
+  }
+];
+
+const whatWeDoLinks = [
+  { label: "Social media for healthcare", href: "/services/#healthcare-social-media" },
+  { label: "Google Business Profile & local SEO", href: "/services/#google-business-profile-local-seo" },
+  { label: "Healthcare websites", href: "/services/#healthcare-websites" },
+  { label: "Brand & content", href: "/services/#brand-content" },
+  { label: "NMC-aware communication audits", href: "/services/#nmc-aware-communication-audit" }
+];
+
+const howWeWorkSteps = [
+  {
+    step: "1",
+    name: "Classify",
+    copy: "Doctor, clinic, hospital or diagnostics: the rules differ, so we start there."
+  },
+  {
+    step: "2",
+    name: "Check",
+    copy: "Credentials, claims and current content, reviewed against the NMC guidelines."
+  },
+  {
+    step: "3",
+    name: "Create",
+    copy: "Calm, premium content and pages your patients find useful."
+  },
+  {
+    step: "4",
+    name: "Care",
+    copy: "Monthly review, honest reporting, steady improvement."
+  }
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  canonicalPath="/"
+  schemas={[faqSchema]}
+>
+  <!-- Hero Section -->
+  <section class="bg-navy text-canvas-warm pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-navy-light" aria-labelledby="home-h1">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      
+      <!-- Eyebrow -->
+      <div class="inline-flex items-center space-x-2 bg-navy-light/60 border border-stone-soft/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest text-taupe-light uppercase">
+        <span>DOCTOR-FOUNDED · NMC-AWARE · AHMEDABAD</span>
+      </div>
+
+      <!-- H1 -->
+      <h1 id="home-h1" class="text-4xl sm:text-5xl lg:text-6xl font-serif font-semibold tracking-tight text-canvas-warm leading-[1.15] max-w-4xl mx-auto">
+        Healthcare marketing, held to a clinical standard.
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-lg sm:text-xl text-canvas-warm/85 font-sans max-w-3xl mx-auto leading-relaxed">
+        We help hospitals, clinics and diagnostic centres in Ahmedabad become clearer, more credible and easier to find, without putting a registration at risk.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/free-nmc-check/"
+          class="w-full sm:w-auto inline-flex items-center justify-center bg-canvas-warm text-navy font-semibold px-7 py-3.5 rounded text-base hover:bg-white transition-all shadow-md focus:ring-2 focus:ring-canvas-warm"
+        >
+          Get a free NMC-aware check
+        </a>
+        <a
+          href={SITE_CONFIG.contact.whatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:w-auto inline-flex items-center justify-center border border-stone-soft/50 text-canvas-warm font-medium px-7 py-3.5 rounded text-base hover:bg-navy-light transition-colors"
+        >
+          WhatsApp us
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Intro Block (Answer-First Quotable for AI Search) -->
+  <section class="py-14 sm:py-20 bg-canvas border-b border-stone-soft">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white border-l-4 border-navy p-8 sm:p-10 rounded-r-lg shadow-sm border border-stone-soft/60">
+        <p class="text-xl sm:text-2xl font-serif text-navy leading-relaxed font-normal">
+          211 Marketing is a doctor-founded healthcare marketing agency in Ahmedabad. We plan and run social media, Google Business Profile, local SEO and websites for hospitals, clinics, diagnostic centres and specialists, and every piece passes an 8-point review built around the NMC guidelines dated 6 October 2026.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three Reasons, Three Cards -->
+  <section class="py-16 sm:py-24 bg-canvas border-b border-stone-soft" aria-labelledby="three-reasons-heading">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="text-xs font-semibold tracking-widest text-taupe-quiet uppercase block mb-2">Our Standard</span>
+        <h2 id="three-reasons-heading" class="text-3xl sm:text-4xl font-serif font-semibold text-navy">
+          Three reasons, three cards
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {threeCards.map((card, idx) => (
+          <div class="bg-white border border-stone-soft rounded-lg p-8 shadow-sm flex flex-col justify-between hover:border-taupe-quiet transition-colors">
+            <div class="space-y-4">
+              <span class="text-xs font-mono text-taupe-quiet block">0{idx + 1}</span>
+              <h3 class="text-2xl font-serif font-semibold text-navy">
+                {card.title}
+              </h3>
+              <p class="text-base text-navy/80 font-sans leading-relaxed">
+                {card.line}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Do -->
+  <section class="py-16 sm:py-20 bg-canvas-muted border-b border-stone-soft" aria-labelledby="what-we-do-heading">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+      <h2 id="what-we-do-heading" class="text-2xl sm:text-3xl font-serif font-semibold text-navy">
+        What we do
+      </h2>
+      
+      <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-4xl mx-auto">
+        {whatWeDoLinks.map((item, index) => (
+          <span class="inline-flex items-center">
+            <a
+              href={item.href}
+              class="inline-block bg-white border border-stone-soft px-4 py-2.5 rounded text-sm sm:text-base font-medium text-navy hover:border-navy hover:text-navy transition-colors shadow-2xs"
+            >
+              {item.label}
+            </a>
+            {index < whatWeDoLinks.length - 1 && (
+              <span class="mx-2 text-stone-soft hidden sm:inline" aria-hidden="true">·</span>
+            )}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Work (4 steps) -->
+  <section class="py-16 sm:py-24 bg-canvas border-b border-stone-soft" aria-labelledby="how-we-work-heading">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14">
+        <span class="text-xs font-semibold tracking-widest text-taupe-quiet uppercase block mb-2">Process</span>
+        <h2 id="how-we-work-heading" class="text-3xl sm:text-4xl font-serif font-semibold text-navy">
+          How we work (4 steps)
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {howWeWorkSteps.map((s) => (
+          <div class="bg-white border border-stone-soft rounded-lg p-6 space-y-3 relative shadow-2xs">
+            <div class="w-8 h-8 rounded-full bg-navy text-canvas-warm flex items-center justify-center font-serif font-semibold text-sm">
+              {s.step}
+            </div>
+            <h3 class="text-xl font-serif font-semibold text-navy">
+              {s.name}
+            </h3>
+            <p class="text-sm text-navy/80 font-sans leading-relaxed">
+              {s.copy}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Free Check Band (Ink Navy) -->
+  <FreeCheckBand />
+
+  <!-- FAQ Section (FAQPage schema linked directly) -->
+  <FAQAccordion
+    heading="Frequently asked questions"
+    lead="Short, direct answers in the format AI assistants quote."
+  />
+
+  <!-- Closing line above footer -->
+  <section class="py-12 bg-canvas text-center border-t border-stone-soft">
+    <div class="max-w-2xl mx-auto px-4">
+      <p class="text-2xl sm:text-3xl font-serif italic text-navy">
+        Less noise. More trust.
+      </p>
+    </div>
+  </section>
+</Layout>

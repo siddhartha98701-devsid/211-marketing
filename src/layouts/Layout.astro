@@ -1,0 +1,56 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import MobileFloatingBar from "../components/MobileFloatingBar.astro";
+import ConsentBanner from "../components/ConsentBanner.astro";
+import "../styles/global.css";
+
+export interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  schemas?: Record<string, any>[];
+}
+
+const { title, description, canonicalPath, ogImage, schemas } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      ogImage={ogImage}
+      schemas={schemas}
+    />
+  </head>
+  <body class="bg-canvas text-navy min-h-screen flex flex-col font-sans selection:bg-navy selection:text-canvas-warm">
+    
+    <!-- Keyboard Accessibility: Skip to Content -->
+    <a href="#main-content" class="skip-link">
+      Skip to main content
+    </a>
+
+    <!-- Header Navigation -->
+    <Header />
+
+    <!-- Main Landmark -->
+    <main id="main-content" class="flex-grow focus:outline-none">
+      <slot />
+    </main>
+
+    <!-- Footer Landmark -->
+    <Footer />
+
+    <!-- Mobile Sticky Call/WhatsApp Bar -->
+    <MobileFloatingBar />
+
+    <!-- Cookie & DPDP Consent Banner -->
+    <ConsentBanner />
+
+  </body>
+</html>

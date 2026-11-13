@@ -1,0 +1,66 @@
+---
+import { SITE_CONFIG } from "../config/site";
+
+const showBanner = SITE_CONFIG.flags.analyticsEnabled;
+---
+
+{showBanner && (
+  <div
+    id="cookie-consent-banner"
+    class="fixed bottom-16 md:bottom-4 left-4 right-4 md:left-auto md:right-4 max-w-md bg-navy-deep text-canvas-warm p-4 rounded-lg shadow-xl border border-navy-light z-50 text-xs hidden"
+    role="region"
+    aria-label="Privacy and analytics preferences"
+  >
+    <div class="space-y-2">
+      <p class="font-medium text-canvas-warm">Privacy &amp; Analytics</p>
+      <p class="text-canvas-warm/75 leading-relaxed">
+        We respect your privacy under the Indian DPDP Act 2023. We only use minimal, anonymised analytics to understand site performance. No advertising pixels or session recording.
+      </p>
+      <div class="flex items-center space-x-3 pt-2">
+        <button
+          type="button"
+          id="accept-analytics"
+          class="bg-canvas-warm text-navy font-semibold px-3 py-1.5 rounded hover:bg-white transition-colors"
+        >
+          Accept
+        </button>
+        <button
+          type="button"
+          id="decline-analytics"
+          class="border border-stone-soft/40 text-canvas-warm/90 px-3 py-1.5 rounded hover:bg-navy-light transition-colors"
+        >
+          Decline
+        </button>
+        <a href="/privacy/" class="text-taupe-light hover:text-canvas-warm underline ml-auto">
+          Policy
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const banner = document.getElementById("cookie-consent-banner");
+    const acceptBtn = document.getElementById("accept-analytics");
+    const declineBtn = document.getElementById("decline-analytics");
+
+    const consentStatus = localStorage.getItem("211_analytics_consent");
+
+    if (!consentStatus && banner) {
+      banner.classList.remove("hidden");
+    }
+
+    if (acceptBtn && banner) {
+      acceptBtn.addEventListener("click", () => {
+        localStorage.setItem("211_analytics_consent", "granted");
+        banner.classList.add("hidden");
+      });
+    }
+
+    if (declineBtn && banner) {
+      declineBtn.addEventListener("click", () => {
+        localStorage.setItem("211_analytics_consent", "denied");
+        banner.classList.add("hidden");
+      });
+    }
+  </script>
+)}
