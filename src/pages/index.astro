@@ -2,6 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import FreeCheckBand from "../components/FreeCheckBand.astro";
 import FAQAccordion from "../components/FAQAccordion.astro";
+import Hero3DBackground from "../components/Hero3DBackground.astro";
+import BrandSculpture3D from "../components/BrandSculpture3D.astro";
+import ComplianceLens3D from "../components/ComplianceLens3D.astro";
 import { SITE_CONFIG } from "../config/site";
 import { getActiveFaqs } from "../config/faq";
 import { getFAQPageSchema } from "../schemas/jsonld";
@@ -65,9 +68,10 @@ const howWeWorkSteps = [
   canonicalPath="/"
   schemas={[faqSchema]}
 >
-  <!-- Hero Section -->
-  <section class="bg-navy text-canvas-warm pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-navy-light" aria-labelledby="home-h1">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+  <!-- Hero Section with Interactive 3D Topographic Lattice Background -->
+  <section class="bg-navy text-canvas-warm pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-navy-light relative overflow-hidden" aria-labelledby="home-h1">
+    <Hero3DBackground />
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
       
       <!-- Eyebrow -->
       <div class="inline-flex items-center space-x-2 bg-navy-light/60 border border-stone-soft/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest text-taupe-light uppercase">
@@ -105,13 +109,24 @@ const howWeWorkSteps = [
     </div>
   </section>
 
-  <!-- Intro Block (Answer-First Quotable for AI Search) -->
+  <!-- Intro Block (Answer-First Quotable for AI Search) & Interactive 3D Brand Sculpture -->
   <section class="py-14 sm:py-20 bg-canvas border-b border-stone-soft">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-white border-l-4 border-navy p-8 sm:p-10 rounded-r-lg shadow-sm border border-stone-soft/60">
-        <p class="text-xl sm:text-2xl font-serif text-navy leading-relaxed font-normal">
-          211 Marketing is a doctor-founded healthcare marketing agency in Ahmedabad. We plan and run social media, Google Business Profile, local SEO and websites for hospitals, clinics, diagnostic centres and specialists, and every piece passes an 8-point review built around the NMC guidelines dated 6 October 2026.
-        </p>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        
+        <div class="lg:col-span-7">
+          <div class="bg-white border-l-4 border-navy p-8 sm:p-10 rounded-r-lg shadow-sm border border-stone-soft/60">
+            <span class="text-xs font-semibold tracking-wider text-taupe-quiet uppercase block mb-3">Agency Mandate</span>
+            <p class="text-xl sm:text-2xl font-serif text-navy leading-relaxed font-normal">
+              211 Marketing is a doctor-founded healthcare marketing agency in Ahmedabad. We plan and run social media, Google Business Profile, local SEO and websites for hospitals, clinics, diagnostic centres and specialists, and every piece passes an 8-point review built around the NMC guidelines dated 6 October 2026.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col items-center">
+          <BrandSculpture3D />
+        </div>
+
       </div>
     </div>
   </section>

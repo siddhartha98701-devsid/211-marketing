@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import FreeCheckBand from "../components/FreeCheckBand.astro";
+import ComplianceLens3D from "../components/ComplianceLens3D.astro";
 import { SITE_CONFIG } from "../config/site";
 import { NMC_GUIDE_DATA } from "../config/nmc-guide";
 import { getNMCArticleSchema, getBreadcrumbSchema } from "../schemas/jsonld";
@@ -43,14 +44,19 @@ const breadcrumbSchema = getBreadcrumbSchema(SITE_CONFIG.placeholders.siteUrl, [
     </header>
 
     <!-- Main Content Body -->
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
       
-      <!-- Answer Box (First Paragraph) -->
-      <div class="bg-white border-l-4 border-navy p-8 sm:p-10 rounded-r-lg shadow-sm border border-stone-soft/70 mb-16">
-        <span class="text-xs font-semibold tracking-wider text-taupe-quiet uppercase block mb-2">Executive Summary</span>
-        <p class="text-xl sm:text-2xl font-serif text-navy leading-relaxed font-normal">
-          {NMC_GUIDE_DATA.answerBox}
-        </p>
+      <!-- Answer Box & 3D Compliance Lens -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
+        <div class="lg:col-span-7 bg-white border-l-4 border-navy p-8 sm:p-10 rounded-r-lg shadow-sm border border-stone-soft/70">
+          <span class="text-xs font-semibold tracking-wider text-taupe-quiet uppercase block mb-2">Executive Summary</span>
+          <p class="text-xl sm:text-2xl font-serif text-navy leading-relaxed font-normal">
+            {NMC_GUIDE_DATA.answerBox}
+          </p>
+        </div>
+        <div class="lg:col-span-5 flex flex-col items-center">
+          <ComplianceLens3D />
+        </div>
       </div>
 
       <!-- Question & Answer-First Sections -->

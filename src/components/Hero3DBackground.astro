@@ -1,0 +1,173 @@
+---
+// Interactive 3D Architectural Topography Background for Hero Section
+// Calm, restrained, human-crafted mathematics — zero AI-cliché effects.
+---
+
+<div id="hero-3d-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+  <canvas id="hero-3d-canvas" class="w-full h-full opacity-60"></canvas>
+</div>
+
+<script>
+  import * as THREE from 'three';
+
+  function initHeroBackground() {
+    const container = document.getElementById('hero-3d-container');
+    const canvas = document.getElementById('hero-3d-canvas') as HTMLCanvasElement | null;
+    if (!container || !canvas) return;
+
+    // Respect user's motion preferences
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Scene & Camera
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
+    camera.position.set(0, -6, 12);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Architectural Wireframe Topographic Grid (Soft Stone & Quiet Taupe on Ink Navy)
+    const cols = 55;
+    const rows = 35;
+    const geometry = new THREE.PlaneGeometry(36, 24, cols, rows);
+    const pos = geometry.attributes.position;
+    const initialZ = new Float32Array(pos.count);
+
+    // Initial natural contour elevation
+    for (let i = 0; i < pos.count; i++) {
+      const x = pos.getX(i);
+      const y = pos.getY(i);
+      const dist = Math.sqrt(x * x + y * y);
+      const z = Math.sin(x * 0.25) * Math.cos(y * 0.25) * 0.8 + Math.sin(dist * 0.3) * 0.4;
+      pos.setZ(i, z);
+      initialZ[i] = z;
+    }
+    geometry.computeVertexNormals();
+
+    // Elegant architectural material: subtle wireframe lattice with Soft Stone color
+    const material = new THREE.MeshBasicMaterial({
+      color: 0x9A8A72,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.32
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.rotation.x = -Math.PI * 0.28;
+    scene.add(mesh);
+
+    // Subtle coordinate node markers at grid intersections
+    const pointsMat = new THREE.PointsMaterial({
+      color: 0xD8D1C6,
+      size: 0.08,
+      transparent: true,
+      opacity: 0.45
+    });
+    const pointsMesh = new THREE.Points(geometry, pointsMat);
+    pointsMesh.rotation.x = mesh.rotation.x;
+    scene.add(pointsMesh);
+
+    // Mouse Tracking with Inertial Damping
+    const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    const heroSection = container.closest('section');
+
+    function onMouseMove(e: MouseEvent) {
+      if (!heroSection) return;
+      const rect = heroSection.getBoundingClientRect();
+      const normX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const normY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+      mouse.targetX = normX * 4;
+      mouse.targetY = normY * 3;
+    }
+
+    if (heroSection) {
+      heroSection.addEventListener('mousemove', onMouseMove, { passive: true });
+    }
+
+    // Resize Handler
+    function onResize() {
+      if (!container) return;
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+    window.addEventListener('resize', onResize);
+
+    // Animation Loop with Visibility Caching
+    let animId: number;
+    let clock = new THREE.Clock();
+    let isVisible = true;
+
+    // Observe hero visibility to conserve GPU
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible && !animId) {
+        animate();
+      }
+    }, { threshold: 0.05 });
+
+    if (heroSection) observer.observe(heroSection);
+
+    function animate() {
+      if (!isVisible) {
+        animId = 0;
+        return;
+      }
+      animId = requestAnimationFrame(animate);
+
+      if (prefersReducedMotion) {
+        renderer.render(scene, camera);
+        return;
+      }
+
+      const elapsed = clock.getElapsedTime();
+
+      // Smooth mouse follow with viscous damping
+      mouse.x += (mouse.targetX - mouse.x) * 0.04;
+      mouse.y += (mouse.targetY - mouse.y) * 0.04;
+
+      mesh.rotation.z = mouse.x * 0.03;
+      pointsMesh.rotation.z = mesh.rotation.z;
+
+      // Gentle undulating respiration wave
+      const positions = geometry.attributes.position;
+      for (let i = 0; i < positions.count; i++) {
+        const x = positions.getX(i);
+        const y = positions.getY(i);
+        const baseZ = initialZ[i];
+
+        // Interaction wave: distance from cursor in world space
+        const dx = x - mouse.x * 2.5;
+        const dy = y - mouse.y * 2.0;
+        const cursorDist = Math.sqrt(dx * dx + dy * dy);
+        const mouseRipple = Math.exp(-cursorDist * 0.35) * Math.sin(cursorDist * 2.0 - elapsed * 2.5) * 0.9;
+
+        // Slow calm respiratory wave (0.2 Hz)
+        const calmBreath = Math.sin(x * 0.3 + elapsed * 0.6) * Math.cos(y * 0.3 + elapsed * 0.5) * 0.35;
+
+        positions.setZ(i, baseZ + calmBreath + mouseRipple);
+      }
+      positions.needsUpdate = true;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  }
+
+  // Run on DOM load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroBackground);
+  } else {
+    initHeroBackground();
+  }
+</script>
