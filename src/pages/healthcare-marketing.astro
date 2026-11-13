@@ -16,22 +16,10 @@ const breadcrumbSchema = getBreadcrumbSchema(SITE_CONFIG.placeholders.siteUrl, [
 ]);
 
 const whoWeWorkWith = [
-  {
-    title: "Hospitals and multi-speciality centres",
-    desc: "Institution-level communication covering departments, facilities, verified technology and emergency care."
-  },
-  {
-    title: "Clinics and day-care centres",
-    desc: "Clear, local visibility that explains treatments and clinical protocols without retail hype."
-  },
-  {
-    title: "Diagnostics and labs",
-    desc: "Factual information about test capabilities, accreditations, sample collection and reporting turnaround."
-  },
-  {
-    title: "Individual specialists",
-    desc: "Thoughtful practitioner positioning highlighting verified credentials, qualifications and medical education."
-  }
+  "Hospitals and multi-speciality centres",
+  "Clinics and day-care centres",
+  "Diagnostics and labs",
+  "Individual specialists"
 ];
 
 const whatChangesForYou = [
@@ -52,10 +40,6 @@ const whatChangesForYou = [
   <section class="bg-navy text-canvas-warm pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-navy-light" aria-labelledby="healthcare-h1">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
       
-      <div class="inline-flex items-center space-x-2 bg-navy-light/60 border border-stone-soft/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest text-taupe-light uppercase">
-        <span>ETHICAL HEALTHCARE COMMUNICATION</span>
-      </div>
-
       <h1 id="healthcare-h1" class="text-4xl sm:text-5xl lg:text-6xl font-serif font-semibold tracking-tight text-canvas-warm leading-[1.15] max-w-4xl mx-auto">
         Hospital and clinic marketing in Ahmedabad, done properly.
       </h1>
@@ -80,22 +64,17 @@ const whatChangesForYou = [
   <section class="py-16 sm:py-24 bg-canvas border-b border-stone-soft" aria-labelledby="who-we-work-with-heading">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-14">
-        <span class="text-xs font-semibold tracking-widest text-taupe-quiet uppercase block mb-2">Practice Focus</span>
         <h2 id="who-we-work-with-heading" class="text-3xl sm:text-4xl font-serif font-semibold text-navy">
           Who we work with
         </h2>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {whoWeWorkWith.map((tile, i) => (
-          <div class="bg-white border border-stone-soft rounded-lg p-6 shadow-2xs hover:border-taupe-quiet transition-colors space-y-3">
-            <span class="text-xs font-mono text-taupe-quiet block">0{i + 1}</span>
-            <h3 class="text-xl font-serif font-semibold text-navy">
-              {tile.title}
+        {whoWeWorkWith.map((title) => (
+          <div class="bg-white border border-stone-soft rounded-lg p-8 shadow-2xs hover:border-taupe-quiet transition-colors flex items-center justify-center text-center min-h-[140px]">
+            <h3 class="text-xl font-serif font-semibold text-navy leading-snug">
+              {title}
             </h3>
-            <p class="text-sm text-navy/80 font-sans leading-relaxed">
-              {tile.desc}
-            </p>
           </div>
         ))}
       </div>
@@ -106,7 +85,6 @@ const whatChangesForYou = [
   <section class="py-16 sm:py-24 bg-canvas-muted border-b border-stone-soft" aria-labelledby="what-changes-heading">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <span class="text-xs font-semibold tracking-widest text-taupe-quiet uppercase block mb-2">The Outcome</span>
         <h2 id="what-changes-heading" class="text-3xl sm:text-4xl font-serif font-semibold text-navy">
           What changes for you
         </h2>

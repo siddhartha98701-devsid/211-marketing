@@ -120,17 +120,15 @@ const howWeWorkSteps = [
   <section class="py-16 sm:py-24 bg-canvas border-b border-stone-soft" aria-labelledby="three-reasons-heading">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-14">
-        <span class="text-xs font-semibold tracking-widest text-taupe-quiet uppercase block mb-2">Our Standard</span>
         <h2 id="three-reasons-heading" class="text-3xl sm:text-4xl font-serif font-semibold text-navy">
           Three reasons, three cards
         </h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {threeCards.map((card, idx) => (
+        {threeCards.map((card) => (
           <div class="bg-white border border-stone-soft rounded-lg p-8 shadow-sm flex flex-col justify-between hover:border-taupe-quiet transition-colors">
             <div class="space-y-4">
-              <span class="text-xs font-mono text-taupe-quiet block">0{idx + 1}</span>
               <h3 class="text-2xl font-serif font-semibold text-navy">
                 {card.title}
               </h3>
@@ -173,7 +171,6 @@ const howWeWorkSteps = [
   <section class="py-16 sm:py-24 bg-canvas border-b border-stone-soft" aria-labelledby="how-we-work-heading">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-14">
-        <span class="text-xs font-semibold tracking-widest text-taupe-quiet uppercase block mb-2">Process</span>
         <h2 id="how-we-work-heading" class="text-3xl sm:text-4xl font-serif font-semibold text-navy">
           How we work (4 steps)
         </h2>

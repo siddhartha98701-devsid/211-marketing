@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import FreeCheckBand from "../components/FreeCheckBand.astro";
 import { SITE_CONFIG } from "../config/site";
 import { SERVICES_DATA, SERVICES_CLOSING_LINE } from "../config/services";
 import { getServicesSchema, getBreadcrumbSchema } from "../schemas/jsonld";
@@ -24,17 +23,9 @@ const breadcrumbSchema = getBreadcrumbSchema(SITE_CONFIG.placeholders.siteUrl, [
   <section class="bg-navy text-canvas-warm pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-navy-light" aria-labelledby="services-h1">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
       
-      <div class="inline-flex items-center space-x-2 bg-navy-light/60 border border-stone-soft/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-widest text-taupe-light uppercase">
-        <span>STRATEGIC CAPABILITIES</span>
-      </div>
-
       <h1 id="services-h1" class="text-4xl sm:text-5xl lg:text-6xl font-serif font-semibold tracking-tight text-canvas-warm leading-[1.15] max-w-4xl mx-auto">
         Healthcare marketing services.
       </h1>
-
-      <p class="text-lg sm:text-xl text-canvas-warm/85 font-sans max-w-2xl mx-auto leading-relaxed">
-        Disciplined execution across social media, local search, websites and compliance audits.
-      </p>
 
     </div>
   </section>
@@ -45,11 +36,8 @@ const breadcrumbSchema = getBreadcrumbSchema(SITE_CONFIG.placeholders.siteUrl, [
       <h2 id="services-list-heading" class="sr-only">List of Services</h2>
       
       <div class="divide-y divide-stone-soft">
-        {SERVICES_DATA.map((service, idx) => (
+        {SERVICES_DATA.map((service) => (
           <article id={service.id} class="py-12 sm:py-16 first:pt-0 last:pb-8 space-y-4">
-            <span class="text-xs font-mono text-taupe-quiet uppercase tracking-wider block">
-              Capability 0{idx + 1}
-            </span>
             <h2 class="text-3xl sm:text-4xl font-serif font-semibold text-navy">
               {service.title}
             </h2>
@@ -69,7 +57,4 @@ const breadcrumbSchema = getBreadcrumbSchema(SITE_CONFIG.placeholders.siteUrl, [
 
     </div>
   </section>
-
-  <!-- Free Check Band -->
-  <FreeCheckBand />
 </Layout>
