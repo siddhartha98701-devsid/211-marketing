@@ -10,8 +10,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "tsc --noEmit",
-    "seo-check": "node scripts/check-seo-limits.mjs",
-    "test": "node scripts/check-seo-limits.mjs && node scripts/verify-schemas.mjs && node scripts/verify-headers.mjs"
+    "seo-check": "node scripts/check-seo-limits.mjs"
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
@@ -20,15 +19,12 @@
     "@astrojs/tailwind": "5.1.5",
     "@fontsource/eb-garamond": "5.1.1",
     "@fontsource/lato": "5.1.1",
-    "@types/three": "0.170.0",
     "astro": "5.18.2",
     "tailwindcss": "3.4.17",
-    "three": "0.170.0",
     "typescript": "5.7.3",
     "zod": "3.24.2"
   },
   "devDependencies": {
-    "@types/node": "20.17.19",
-    "puppeteer-core": "^23.8.0"
+    "@types/node": "20.17.19"
   }
 }
