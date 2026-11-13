@@ -14,7 +14,7 @@
     "test": "node scripts/check-seo-limits.mjs && node scripts/verify-schemas.mjs && node scripts/verify-headers.mjs"
   },
   "dependencies": {
-    "@astrojs/check": "0.9.4",
+    "@astrojs/check": "0.9.12",
     "@astrojs/cloudflare": "12.6.13",
     "@astrojs/sitemap": "3.2.1",
     "@astrojs/tailwind": "5.1.5",
