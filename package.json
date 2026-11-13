@@ -20,7 +20,7 @@
     "@astrojs/tailwind": "5.1.5",
     "@fontsource/eb-garamond": "5.1.1",
     "@fontsource/lato": "5.1.1",
-    "astro": "5.18.2",
+    "astro": "7.4.9",
     "tailwindcss": "3.4.17",
     "typescript": "5.7.3",
     "zod": "3.24.2"
